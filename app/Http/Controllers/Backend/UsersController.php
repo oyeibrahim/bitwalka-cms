@@ -40,7 +40,7 @@ class UsersController extends Controller
                 ->paginate($data_per_page);
         }
 
-        return view('backend/admins/list', ['admins' => $data]);
+        return view('backend/admins/list', ['admins' => $data, 'page_name' => 'admins_list', 'page_title' => 'Admins List']);
     }
 
     function editor_list(Request $req)
@@ -72,7 +72,7 @@ class UsersController extends Controller
                 ->paginate($data_per_page);
         }
 
-        return view('backend/editors/list', ['editors' => $data]);
+        return view('backend/editors/list', ['editors' => $data, 'page_name' => 'editors_list', 'page_title' => 'Editors List']);
     }
 
 
@@ -150,14 +150,14 @@ class UsersController extends Controller
                 ->paginate($data_per_page);
         }
 
-        return view('backend/users/list', ['users' => $data]);
+        return view('backend/users/list', ['users' => $data, 'page_name' => 'users_list', 'page_title' => 'Users List']);
     }
 
     function user($id)
     {
         $data = User::find($id);
 
-        return view('backend/users/detail', ['user' => $data]);
+        return view('backend/users/detail', ['user' => $data, 'page_name' => 'user_details', 'page_title' => 'User Details']);
     }
 
     function edit($id)
@@ -165,7 +165,7 @@ class UsersController extends Controller
         $data = User::find($id);
         $roles = DB::table('roles')->pluck('name');
 
-        return view('backend/users/edit', ['user' => $data, 'roles' => $roles]);
+        return view('backend/users/edit', ['user' => $data, 'roles' => $roles, 'page_name' => 'user_edit', 'page_title' => 'Edit User']);
     }
 
     function editController(Request $req)

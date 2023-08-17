@@ -10,6 +10,6 @@ class HomeController extends Controller
     //
     public function home()
     {
-        return view('backend/home');
+        return view('backend/home', ['page_name' => 'admin_home', 'page_title' => 'Admin Dashboard']);
     }
 }

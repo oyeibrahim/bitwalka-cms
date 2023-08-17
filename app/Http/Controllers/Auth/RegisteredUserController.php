@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
             $referrer = $request->input('ref');
         }
 
-        return view('auth.register', ['ref' => $referrer]);
+        return view('auth.register', ['ref' => $referrer, 'page_name' => 'register', 'page_title' => 'User Registration']);
     }
 
     /**

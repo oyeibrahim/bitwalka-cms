@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('auth.login', ['page_name' => 'login', 'page_title' => 'User Login']);
     }
 
     /**
@@ -32,9 +32,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // Add last login // can also use Carbon::now('UTC')
-        DB::table('users')->where('id', Auth::user()->id)->update(['last_login' => Carbon::now('GMT+1')]);
+        // Also add user IP address
+        DB::table('users')->where('id', Auth::user()->id)
+            ->update(['last_login' => Carbon::now('GMT+1'), 'ip' => $request->ip()]);
 
-        return redirect()->intended(app()->getLocale().RouteServiceProvider::HOME);
+        return redirect()->intended(app()->getLocale() . RouteServiceProvider::HOME);
     }
 
     /**
